@@ -3,6 +3,12 @@ const cors = require("cors");
 const app = express();
 const ConnectDB = require("./db");
 const subscribersModel = require("./Models/subscribersModel");
+const categoriesModel= require("./Models/categoriesModel")
+const gendersModel = require("./Models/gendersModel")
+// const servicesModel = require("./Models/servicesModel");
+const servicesModel = require("./Models/servicesModel");
+const citiesModel = require("./Models/citiesModel")
+const providersModel = require("./Models/providersModel");
 
 app.use(express.json());
 app.use(cors());
@@ -16,8 +22,70 @@ app.get("/", (req, res) => {
   res.send("Welcome to GOPDAC....");
 });
 
+app.get("/categories", async (req,res)=>{
+  ConnectDB();
+  const result = await categoriesModel.find({});
+  res.send(result);
+})
+
+
+app.post("/addcategory", (req,res)=>{
+  ConnectDB();
+  const newCategory= new categoriesModel(req.body);
+  newCategory.save();
+  res.send("New Category has been added !!!")
+})
+app.get("/genders", async (req,res)=>{
+  ConnectDB();
+  const result = await gendersModel.find({});
+  res.send(result);
+})
+
+app.post("/addgender", (req,res)=>{
+  ConnectDB();
+  const newGender= new gendersModel(req.body);
+  newGender.save();
+  res.send("New Gender has been added !!!")
+})
+app.get("/Services", async (req,res)=>{
+  ConnectDB();
+  const result = await servicesModel.find({});
+  res.send(result);
+})
+
+app.post("/addservices", (req,res)=>{
+  ConnectDB();
+  const newService= new servicesModel(req.body);
+  newservice.save();
+  res.send("New Service has been added !!!")
+})
+app.get("/cities", async (req,res)=>{
+  ConnectDB();
+  const result = await citiesModel.find({});
+  res.send(result);
+})
+
+app.post("/addcities", (req,res)=>{
+  ConnectDB();
+  const newCities= new citiesModel(req.body);
+  newCities.save();
+  res.send("New City has been added !!!")
+})
+app.get("/providers", async (req,res)=>{
+  ConnectDB();
+  const result = await providersModel.find({});
+  res.send(result);
+})
+
+app.post("/addproviders", (req,res)=>{
+  ConnectDB();
+  const newProviders= new providersModel(req.body);
+  newProviders.save();
+  res.send("New Provider has been added !!!")
+})
+
 app.get("/subscribers", async (req, res) => {
-  ConnectDB("fintrackdb");
+  ConnectDB();
   const result = await subscribersModel.find({});
   res.send(result);
 });
@@ -100,6 +168,6 @@ app.post("/api/getbank", async (req, res) => {
   res.send(result);
 });
 
-app.listen(3030, () => {
-  console.log(`Connected to server : 3030`);
+app.listen(4040, () => {
+  console.log(`Connected to server : 4040`);
 });

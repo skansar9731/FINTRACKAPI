@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const ConnectDB = (dbname) => {
-  const db = `mongodb://localhost/${dbname}`;
+const ConnectDB = () => {
+  const db = `mongodb://localhost/Fintrackdb`;
   mongoose
     .connect(db)
     .then(() => console.log(`Connected to ${db}`))
